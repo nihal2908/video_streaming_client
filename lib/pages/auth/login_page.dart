@@ -1,15 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
-  final nameController = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -19,16 +18,15 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
-  void signup() {
+  void login() {
     if (formKey.currentState?.validate() ?? false) {
       if (kDebugMode) {
-        print(nameController.text);
+        print(emailController.text);
       }
     }
   }
@@ -36,6 +34,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -46,22 +45,10 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Sign Up!',
+                  'Log In!',
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: size.height * 0.03),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Name'),
-                  controller: nameController,
-                  validator: (value) {
-                    if (value != null && value.trim().isEmpty) {
-                      return 'Please enter your name';
-                    }
-
-                    return null;
-                  },
-                ),
-                SizedBox(height: size.height * 0.01),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Email'),
                   controller: emailController,
@@ -81,7 +68,6 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 SizedBox(height: size.height * 0.01),
                 TextFormField(
-                  obscureText: _obscurePassword,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     suffixIcon: IconButton(
@@ -98,6 +84,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   controller: passwordController,
+                  obscureText: _obscurePassword,
+
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter your password';
@@ -122,9 +110,9 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 SizedBox(height: size.height * 0.02),
                 ElevatedButton(
-                  onPressed: signup,
+                  onPressed: login,
                   child: const Text(
-                    'SIGN UP',
+                    'LOG IN',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
@@ -133,11 +121,11 @@ class _SignupPageState extends State<SignupPage> {
                   onTap: () {},
                   child: RichText(
                     text: TextSpan(
-                      text: 'Already have an account? ',
+                      text: 'Don\'t have an account? ',
                       style: Theme.of(context).textTheme.titleMedium,
                       children: [
                         TextSpan(
-                          text: 'Log In',
+                          text: 'Sign Up',
                           style: Theme.of(
                             context,
                           ).textTheme.titleMedium?.copyWith(color: Colors.red),
