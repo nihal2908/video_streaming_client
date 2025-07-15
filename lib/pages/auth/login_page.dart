@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:vidream/animations/fade_scale_route.dart';
+import 'package:vidream/pages/auth/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -118,7 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: size.height * 0.02),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(
+                      context,
+                    ).pushReplacement(fadeScaleRoute(const SignupPage()));
+                  },
                   child: RichText(
                     text: TextSpan(
                       text: 'Don\'t have an account? ',
